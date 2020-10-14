@@ -16,35 +16,58 @@ struct NavigationTiles: View {
             HStack {
                 HStack {
                     NavigationLink(destination: RandomQuoteView()) {
-                        Text("Random Quote")
+                        VStack {
+                            Text("Random Quote")
+                            Image(systemName: "questionmark")
+                        }
+                        
                     }
                 }
                 .frame(width: screenWidth / 2, height: screenHeight / 4)
                 .background(Color.yellow)
+                .foregroundColor(.pink)
+                .font(.headline)
                 HStack {
                     NavigationLink(destination: DailyQuoteTimeView()) {
-                        Text("Set Daily Quote Time")
+                        VStack {
+                            Text("Set Daily Quote Time")
+                            Image(systemName: "alarm")
+                        }
+                        
                     }
                 }
                 .frame(width: screenWidth / 2, height: screenHeight / 4)
                 .background(Color.orange)
+                .foregroundColor(.red)
+                .font(.headline)
             }
             .frame(width: screenWidth, height: screenHeight / 4)
             HStack {
                 HStack {
                     NavigationLink(destination: SearchQuoteView()) {
-                        Text("Search Quotes")
+                        VStack {
+                            Text("Search Quotes")
+                            Image(systemName: "magnifyingglass")
+                        }
                     }
                 }
                 .frame(width: screenWidth / 2, height: screenHeight / 4)
                 .background(Color.red)
+                .foregroundColor(.orange)
+                .font(.headline)
                 HStack {
                     NavigationLink(destination: FavoriteQuotesView()) {
-                        Text("Favorites")
+                        VStack {
+                            Text("Favorites")
+                            Image(systemName: "star")
+                        }
+                        
                     }
                 }
                 .frame(width: screenWidth / 2, height: screenHeight / 4)
                 .background(Color.pink)
+                .foregroundColor(.yellow)
+                .font(.headline)
             }
             .frame(width: screenWidth, height: screenHeight / 4)
         }
