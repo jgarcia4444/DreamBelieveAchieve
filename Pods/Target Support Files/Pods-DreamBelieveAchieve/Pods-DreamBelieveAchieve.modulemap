@@ -1,0 +1,6 @@
+framework module Pods_DreamBelieveAchieve {
+  umbrella header "Pods-DreamBelieveAchieve-umbrella.h"
+
+  export *
+  module * { export * }
+}
