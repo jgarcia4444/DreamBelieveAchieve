@@ -33,9 +33,33 @@ struct ContentView: View {
                     if let data = res.data {
                         let json = try? JSON(data: data)
                         if let swiftifiedJson = json {
-                            print(swiftifiedJson.count)
+                            self.loopThroughQuotes(quotesJson: swiftifiedJson)
                         }
                     }
+            }
+        }
+        else {
+            print(self.quotes.count)
+            guard let firstQuote = self.quotes.first else {
+                print("No quote saved")
+                return
+            }
+            print(firstQuote.text)
+        }
+    }
+    
+    func loopThroughQuotes(quotesJson: JSON) {
+        quotesJson.forEach { (id, json) in
+            let quoteToBeSaved = Quote(context: moc)
+            let text = json["text"]
+            let author = json["author"] ?? "Unknown"
+            quoteToBeSaved.author = author.stringValue
+            quoteToBeSaved.text = text.stringValue
+            do {
+                try moc.save()
+            } catch {
+                print(error.localizedDescription)
+                return
             }
         }
     }
