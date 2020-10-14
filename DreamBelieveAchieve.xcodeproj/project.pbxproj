@@ -10,10 +10,15 @@
 		1F0655F32536B80D00DE26E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0655F22536B80D00DE26E0 /* AppDelegate.swift */; };
 		1F0655F52536B80D00DE26E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0655F42536B80D00DE26E0 /* SceneDelegate.swift */; };
 		1F0655F72536B80D00DE26E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0655F62536B80D00DE26E0 /* ContentView.swift */; };
-		1F0655F92536B80F00DE26E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0655F82536B80F00DE26E0 /* Assets.xcassets */; };
 		1F0655FC2536B80F00DE26E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0655FB2536B80F00DE26E0 /* Preview Assets.xcassets */; };
 		1F0655FF2536B80F00DE26E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F0655FD2536B80F00DE26E0 /* LaunchScreen.storyboard */; };
 		1F0656082536BD8600DE26E0 /* DreamBelieveAchieve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F0656062536BD8600DE26E0 /* DreamBelieveAchieve.xcdatamodeld */; };
+		1F9EE18F2537777C00F33C3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F9EE18E2537777C00F33C3F /* Assets.xcassets */; };
+		1F9EE1912537850200F33C3F /* NavigationTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EE1902537850200F33C3F /* NavigationTiles.swift */; };
+		1F9EE1932537860000F33C3F /* RandomQuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EE1922537860000F33C3F /* RandomQuoteView.swift */; };
+		1F9EE1952537864C00F33C3F /* DailyQuoteTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EE1942537864C00F33C3F /* DailyQuoteTimeView.swift */; };
+		1F9EE1972537866900F33C3F /* SearchQuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EE1962537866900F33C3F /* SearchQuoteView.swift */; };
+		1F9EE1992537869000F33C3F /* FavoriteQuotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EE1982537869000F33C3F /* FavoriteQuotesView.swift */; };
 		7168F134E43C5A961E615EBA /* Pods_DreamBelieveAchieve.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4021D7D9843B25077502F36 /* Pods_DreamBelieveAchieve.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,11 +27,16 @@
 		1F0655F22536B80D00DE26E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F0655F42536B80D00DE26E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1F0655F62536B80D00DE26E0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1F0655F82536B80F00DE26E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F0655FB2536B80F00DE26E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F0655FE2536B80F00DE26E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F0656002536B80F00DE26E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F0656072536BD8600DE26E0 /* DreamBelieveAchieve.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DreamBelieveAchieve.xcdatamodel; sourceTree = "<group>"; };
+		1F9EE18E2537777C00F33C3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1F9EE1902537850200F33C3F /* NavigationTiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTiles.swift; sourceTree = "<group>"; };
+		1F9EE1922537860000F33C3F /* RandomQuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomQuoteView.swift; sourceTree = "<group>"; };
+		1F9EE1942537864C00F33C3F /* DailyQuoteTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuoteTimeView.swift; sourceTree = "<group>"; };
+		1F9EE1962537866900F33C3F /* SearchQuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQuoteView.swift; sourceTree = "<group>"; };
+		1F9EE1982537869000F33C3F /* FavoriteQuotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteQuotesView.swift; sourceTree = "<group>"; };
 		4B9ADE9561D379506C644639 /* Pods-DreamBelieveAchieve.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamBelieveAchieve.debug.xcconfig"; path = "Target Support Files/Pods-DreamBelieveAchieve/Pods-DreamBelieveAchieve.debug.xcconfig"; sourceTree = "<group>"; };
 		8207197ECC34CBEF6F1642BE /* Pods-DreamBelieveAchieve.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamBelieveAchieve.release.xcconfig"; path = "Target Support Files/Pods-DreamBelieveAchieve/Pods-DreamBelieveAchieve.release.xcconfig"; sourceTree = "<group>"; };
 		E4021D7D9843B25077502F36 /* Pods_DreamBelieveAchieve.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DreamBelieveAchieve.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,11 +77,15 @@
 			children = (
 				1F0655F22536B80D00DE26E0 /* AppDelegate.swift */,
 				1F0655F42536B80D00DE26E0 /* SceneDelegate.swift */,
-				1F0656092536C36600DE26E0 /* Model */,
+				1F9EE1902537850200F33C3F /* NavigationTiles.swift */,
 				1F0655F62536B80D00DE26E0 /* ContentView.swift */,
+				1F9EE1942537864C00F33C3F /* DailyQuoteTimeView.swift */,
+				1F9EE1922537860000F33C3F /* RandomQuoteView.swift */,
+				1F9EE1982537869000F33C3F /* FavoriteQuotesView.swift */,
+				1F9EE1962537866900F33C3F /* SearchQuoteView.swift */,
 				1F0656062536BD8600DE26E0 /* DreamBelieveAchieve.xcdatamodeld */,
-				1F0655F82536B80F00DE26E0 /* Assets.xcassets */,
 				1F0655FD2536B80F00DE26E0 /* LaunchScreen.storyboard */,
+				1F9EE18E2537777C00F33C3F /* Assets.xcassets */,
 				1F0656002536B80F00DE26E0 /* Info.plist */,
 				1F0655FA2536B80F00DE26E0 /* Preview Content */,
 			);
@@ -84,13 +98,6 @@
 				1F0655FB2536B80F00DE26E0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		1F0656092536C36600DE26E0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		5E389A64A9A42F963C6E9DFB /* Pods */ = {
@@ -171,8 +178,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F0655FF2536B80F00DE26E0 /* LaunchScreen.storyboard in Resources */,
+				1F9EE18F2537777C00F33C3F /* Assets.xcassets in Resources */,
 				1F0655FC2536B80F00DE26E0 /* Preview Assets.xcassets in Resources */,
-				1F0655F92536B80F00DE26E0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,10 +232,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9EE1952537864C00F33C3F /* DailyQuoteTimeView.swift in Sources */,
+				1F9EE1932537860000F33C3F /* RandomQuoteView.swift in Sources */,
 				1F0656082536BD8600DE26E0 /* DreamBelieveAchieve.xcdatamodeld in Sources */,
 				1F0655F32536B80D00DE26E0 /* AppDelegate.swift in Sources */,
 				1F0655F52536B80D00DE26E0 /* SceneDelegate.swift in Sources */,
 				1F0655F72536B80D00DE26E0 /* ContentView.swift in Sources */,
+				1F9EE1992537869000F33C3F /* FavoriteQuotesView.swift in Sources */,
+				1F9EE1912537850200F33C3F /* NavigationTiles.swift in Sources */,
+				1F9EE1972537866900F33C3F /* SearchQuoteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,8 +16,52 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)]) var quotes: FetchedResults<Quote>
     
+    
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
+                VStack {
+                    HStack() {
+                        VStack(alignment: .leading) {
+                            HStack{
+                                HStack {
+                                    Text("D")
+                                        .font(.title)
+                                    Text("ream")
+                                        .font(.body)
+                                }
+                            }
+                            .frame(width: 150)
+                            .background(LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                            HStack {
+                                Text("B")
+                                    .font(.title)
+                                Text("elieve")
+                                    .font(.body)
+                            }
+                            .frame(width: 175)
+                            .background(LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                            HStack {
+                                Text("A")
+                                    .font(.title)
+                                Text("cheive")
+                                    .font(.body)
+                            }
+                            .frame(width: 200)
+                            .background(LinearGradient(gradient: Gradient(colors: [.red, .pink]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                        }
+                    }
+                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 2)
+                    HStack {
+                        NavigationTiles()
+                    }
+                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 2)
+                }
+            }
+            .edgesIgnoringSafeArea(.all)
+            .navigationBarTitle("Home")
+        }
         .onAppear {
             self.loadQuotes()
         }
@@ -38,22 +82,17 @@ struct ContentView: View {
                     }
             }
         }
-        else {
-            print(self.quotes.count)
-            guard let firstQuote = self.quotes.first else {
-                print("No quote saved")
-                return
-            }
-            print(firstQuote.text)
-        }
     }
     
     func loopThroughQuotes(quotesJson: JSON) {
         quotesJson.forEach { (id, json) in
             let quoteToBeSaved = Quote(context: moc)
             let text = json["text"]
-            let author = json["author"] ?? "Unknown"
-            quoteToBeSaved.author = author.stringValue
+            if json["author"].stringValue == "null" {
+                quoteToBeSaved.author = "Unknown"
+            } else {
+                quoteToBeSaved.author = json["author"].stringValue
+            }
             quoteToBeSaved.text = text.stringValue
             do {
                 try moc.save()
