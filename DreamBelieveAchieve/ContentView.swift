@@ -45,8 +45,9 @@ struct ContentView: View {
                             HStack {
                                 Text("A")
                                     .font(.title)
-                                Text("cheive")
+                                Text("chieve")
                                     .font(.body)
+                                    .fixedSize(horizontal: true, vertical: false)
                             }
                             .frame(width: 200)
                             .background(LinearGradient(gradient: Gradient(colors: [.red, .pink]), startPoint: .topLeading, endPoint: .bottomTrailing))

@@ -25,6 +25,7 @@ struct FavoriteQuotesView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
+    .navigationBarTitle("Favorite Quotes")
     }
 }
 

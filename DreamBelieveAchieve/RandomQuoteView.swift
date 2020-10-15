@@ -24,6 +24,7 @@ struct RandomQuoteView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
+        .navigationBarTitle("Random Quote")
     }
 }
 
