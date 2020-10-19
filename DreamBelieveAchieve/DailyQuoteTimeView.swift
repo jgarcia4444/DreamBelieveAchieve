@@ -11,6 +11,7 @@ import SwiftUI
 struct DailyQuoteTimeView: View {
     @State private var selectedTime = Date()
     @State private var allowAlertShowing = false
+    @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)]) var quotes: FetchedResults<Quote>
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
@@ -42,21 +43,63 @@ struct DailyQuoteTimeView: View {
         .edgesIgnoringSafeArea(.all)
     }
     
+    func randomQuote() -> Quote {
+        let randomIndex = Int.random(in: 0..<quotes.count)
+        return quotes[randomIndex]
+    }
+    
     func setTimeForQuoteNotification() {
         let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 print("Authorization status is set to authorized.")
+                self.scheduleNotifications()
+                print("notifications set!!!")
             } else if settings.authorizationStatus == .denied {
                 self.allowAlertShowing = true
             } else {
                 center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+                    print("Requesting authorization")
                     if let error = error {
                         print(error.localizedDescription)
+                    }
+                    if granted {
+                        self.scheduleNotifications()
                     }
                 }
             }
         }
+    }
+    
+    func scheduleNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//        for i in 0...49 {
+            let content = UNMutableNotificationContent()
+            let quote = randomQuote()
+            guard let text = quote.text else {
+                print("No Text value found for quote")
+                return
+            }
+            guard let author = quote.author else {
+                print("No author value found for quote")
+                return
+            }
+            content.title = author
+            content.body = text
+            content.sound = .default
+            
+//            var adjustedTime = selectedTime
+//            if i != 0 {
+//                adjustedTime = adjustedTime.addingTimeInterval((Double(i) * 86400))
+//            }
+            
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: selectedTime)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+            
+            let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(notificationRequest, withCompletionHandler: nil)
+//        }
     }
     
 }
