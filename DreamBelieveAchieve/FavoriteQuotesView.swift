@@ -23,6 +23,7 @@ struct FavoriteQuotesView: View {
                     }
                 }
             }
+            .padding(.top, 125)
         }
         .edgesIgnoringSafeArea(.all)
     .navigationBarTitle("Favorite Quotes")

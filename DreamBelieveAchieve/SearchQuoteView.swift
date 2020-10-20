@@ -35,6 +35,7 @@ struct SearchQuoteView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
                         .shadow(color: .gray, radius: 5, x: 0, y: 0)
+                        .padding(.top, 25)
                 }
                 .padding(.top, 100)
                 ScrollView {

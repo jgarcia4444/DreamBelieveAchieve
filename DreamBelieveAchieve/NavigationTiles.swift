@@ -59,7 +59,7 @@ struct NavigationTiles: View {
                     NavigationLink(destination: FavoriteQuotesView()) {
                         VStack {
                             Text("Favorites")
-                            Image(systemName: "star")
+                            Image(systemName: "star.fill")
                         }
                         
                     }

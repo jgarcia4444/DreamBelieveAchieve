@@ -36,6 +36,7 @@ struct DailyQuoteTimeView: View {
                     
                 }
             }
+            .foregroundColor(.white)
         }
         .alert(isPresented: $allowAlertShowing) {
             Alert(title: Text("Authorization Status"), message: Text("In order to allow notifications to be sent to your device from this app it needs to be allowed. Follow these instructions. Settings -> DreamBelieveAchieve -> Notifications -> Allow Notifications."), dismissButton: .default(Text("Okay")))
@@ -73,33 +74,27 @@ struct DailyQuoteTimeView: View {
     
     func scheduleNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-//        for i in 0...49 {
-            let content = UNMutableNotificationContent()
-            let quote = randomQuote()
-            guard let text = quote.text else {
-                print("No Text value found for quote")
-                return
-            }
-            guard let author = quote.author else {
-                print("No author value found for quote")
-                return
-            }
-            content.title = author
-            content.body = text
-            content.sound = .default
-            
-//            var adjustedTime = selectedTime
-//            if i != 0 {
-//                adjustedTime = adjustedTime.addingTimeInterval((Double(i) * 86400))
-//            }
-            
-            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: selectedTime)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-            
-            let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            
-            UNUserNotificationCenter.current().add(notificationRequest, withCompletionHandler: nil)
-//        }
+        
+        let content = UNMutableNotificationContent()
+        let quote = randomQuote()
+        guard let text = quote.text else {
+            print("No Text value found for quote")
+            return
+        }
+        guard let author = quote.author else {
+            print("No author value found for quote")
+            return
+        }
+        content.title = author
+        content.body = text
+        content.sound = .default
+        
+        let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: selectedTime)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+        
+        let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(notificationRequest, withCompletionHandler: nil)
     }
     
 }

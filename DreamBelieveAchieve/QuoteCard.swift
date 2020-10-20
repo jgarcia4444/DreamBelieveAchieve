@@ -11,10 +11,17 @@ import SwiftUI
 struct QuoteCard: View {
     @Environment(\.managedObjectContext) var moc
     var quote: Quote
+    var authorName: String {
+        if quote.author == "" {
+            return "Unknown"
+        } else {
+            return quote.author!
+        }
+    }
     var body: some View {
         VStack {
             HStack {
-                Text("\(quote.author ?? "Unknown")")
+                Text("\(authorName)")
                     .font(.largeTitle)
             }
             .padding(.bottom, 25)
@@ -28,7 +35,6 @@ struct QuoteCard: View {
                     self.favoriteQuote()
                 }) {
                     HStack {
-                        
                         if quote.isFavorited {
                             Text("Unfavorite")
                             Image(systemName: "star.fill")
@@ -41,10 +47,14 @@ struct QuoteCard: View {
             }
         }
     .padding()
+        .animation(.default)
     }
     
     func favoriteQuote() {
         quote.isFavorited = !quote.isFavorited
+    }
+    
+    func saveQuoteContext() {
         do {
             try moc.save()
         } catch {
