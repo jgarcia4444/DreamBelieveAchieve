@@ -16,17 +16,24 @@ struct FavoriteQuotesView: View {
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
-            ScrollView {
-                ForEach(self.favoritedQuotes, id: \.self.objectID) { quote in
-                    VStack {
-                        QuoteCard(quote: quote)
+            VStack {
+                HStack {
+                    Text("Your list of favorted quotes")
+                }
+                ScrollView {
+                    ForEach(self.favoritedQuotes, id: \.self.objectID) { quote in
+                        VStack {
+                            QuoteCard(quote: quote)
+                        }
                     }
                 }
+                .navigationBarTitle("Favorite Quotes", displayMode: .automatic)
+                .padding(.top, 125)
             }
-            .padding(.top, 125)
+            
         }
         .edgesIgnoringSafeArea(.all)
-    .navigationBarTitle("Favorite Quotes")
+    
     }
 }
 

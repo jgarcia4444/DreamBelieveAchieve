@@ -20,17 +20,24 @@ struct QuoteCard: View {
     }
     var body: some View {
         VStack {
-            HStack {
-                Text("\(authorName)")
-                    .font(.largeTitle)
+            VStack {
+                HStack {
+                    Text("\(authorName)")
+                        .font(.largeTitle)
+                }
+                .padding(.bottom, 25)
+                HStack {
+                    Text("\(quote.text ?? "No quote text...")")
+                        .font(.headline)
+                    .fixedSize(horizontal: false, vertical: true)
+                }
             }
-            .padding(.bottom, 25)
+            .padding(15)
+            .background(Color.red)
+            .cornerRadius(10)
+            .shadow(color: Color.black, radius: 4, x: 0, y: 0)
             HStack {
-                Text("\(quote.text ?? "No quote text...")")
-                    .font(.headline)
-                .fixedSize(horizontal: false, vertical: true)
-            }
-            HStack {
+                Spacer()
                 Button(action: {
                     self.favoriteQuote()
                 }) {
@@ -44,24 +51,33 @@ struct QuoteCard: View {
                         }
                     }
                 }
+                .padding(15)
+                .background(Color.orange)
+                .clipShape(Capsule())
+                .shadow(color: Color.black, radius: 4, x: 0, y: 0)
+                Image(systemName: "square.and.arrow.up")
+                    .frame(width: 60, height: 40)
+                    .background(Color.orange)
+                .clipShape(Capsule())
+                    .shadow(color: Color.black, radius: 4, x: 0, y: 0)
+                    .padding(.leading, 50)
+                Spacer()
             }
+            .padding()
         }
-    .padding()
+    .padding(25)
         .animation(.default)
     }
     
     func favoriteQuote() {
         quote.isFavorited = !quote.isFavorited
-    }
-    
-    func saveQuoteContext() {
         do {
             try moc.save()
         } catch {
             print(error.localizedDescription)
         }
+
     }
-    
 }
 
 //struct QuoteCard_Previews: PreviewProvider {
