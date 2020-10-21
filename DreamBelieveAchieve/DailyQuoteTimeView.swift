@@ -74,27 +74,43 @@ struct DailyQuoteTimeView: View {
     
     func scheduleNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        
-        let content = UNMutableNotificationContent()
-        let quote = randomQuote()
-        guard let text = quote.text else {
-            print("No Text value found for quote")
-            return
+        for i in 0..<25 {
+            let content = UNMutableNotificationContent()
+            let quote = randomQuote()
+            guard let text = quote.text else {
+                print("No Text value found for quote")
+                return
+            }
+            guard let author = quote.author else {
+                print("No author value found for quote")
+                return
+            }
+            content.title = author
+            content.body = text
+            content.sound = .default
+            if i == 0 {
+                let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: selectedTime)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+                let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(notificationRequest, withCompletionHandler: nil)
+            } else {
+                guard let adjustedDate = Calendar.current.date(byAdding: .day, value: i, to: selectedTime) else {
+                    print("Could not add one day to the selected time")
+                    return
+                }
+                let dateComponent = Calendar.current.dateComponents([.day, .hour, .minute], from: adjustedDate)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+                let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(notificationRequest, withCompletionHandler: nil)
+            }
         }
-        guard let author = quote.author else {
-            print("No author value found for quote")
-            return
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
+            notifications.forEach { (notification) in
+                print(notification)
+            }
         }
-        content.title = author
-        content.body = text
-        content.sound = .default
-        
-        let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: selectedTime)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-        
-        let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(notificationRequest, withCompletionHandler: nil)
     }
     
 }
