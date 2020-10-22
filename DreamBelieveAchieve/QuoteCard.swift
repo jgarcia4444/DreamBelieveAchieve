@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import Alamofire
+import SwiftyJSON
 
 extension UIView {
     func asImage(rect: CGRect) -> UIImage {
@@ -81,10 +83,13 @@ struct QuoteCard: View {
                         .onTapGesture {
                             self.shareToSocialMedia(medium: .Instagram)
                         }
-                    Image("twitter")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .padding(.leading, 20)
+//                    Image("twitter")
+//                        .resizable()
+//                        .frame(width: 40, height: 40)
+//                        .padding(.leading, 20)
+//                        .onTapGesture {
+//                            self.shareToSocialMedia(medium: .Twitter)
+//                    }
                 }
                 .padding(.leading, 20)
                 Spacer()
@@ -97,7 +102,7 @@ struct QuoteCard: View {
     
     enum MediaType {
         case Facebook
-        case Twitter
+//        case Twitter
         case Instagram
     }
     
@@ -153,8 +158,15 @@ struct QuoteCard: View {
             }
             
             break
-        case .Twitter:
-            break
+//        case .Twitter:
+//            AF.request("https://upload.twitter.com/1.1/media/upload.json", method: .post, parameters: ["media": CIImage(data: imageData) as Any], encoding: URLEncoding.queryString)
+//                .response { response in
+//                    if let data = response.data {
+//                        let json = try? JSON(data: data)
+//                        print(json)
+//                    }
+//            }
+//            break
         }
     }
     
