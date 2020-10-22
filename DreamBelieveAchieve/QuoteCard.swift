@@ -21,6 +21,9 @@ extension UIView {
 
 struct QuoteCard: View {
     @Environment(\.managedObjectContext) var moc
+    @State private var showSocialAlert = false
+    @State private var socialAlertTitle = ""
+    @State private var socialAlertMessage = ""
     var quote: Quote
     var authorName: String {
         if quote.author == "" {
@@ -48,7 +51,6 @@ struct QuoteCard: View {
             .cornerRadius(10)
             .shadow(color: Color.black, radius: 4, x: 0, y: 0)
             HStack {
-                Spacer()
                 Button(action: {
                     self.favoriteQuote()
                 }) {
@@ -76,13 +78,16 @@ struct QuoteCard: View {
                         .onTapGesture {
                             self.shareToSocialMedia(medium: .Facebook)
                     }
+                    .animation(.easeIn)
+                    
                     Image("instagram")
                         .resizable()
                         .frame(width: 40, height: 40)
                         .padding(.leading, 20)
                         .onTapGesture {
                             self.shareToSocialMedia(medium: .Instagram)
-                        }
+                    }
+                    .animation(.easeIn)
 //                    Image("twitter")
 //                        .resizable()
 //                        .frame(width: 40, height: 40)
@@ -91,13 +96,16 @@ struct QuoteCard: View {
 //                            self.shareToSocialMedia(medium: .Twitter)
 //                    }
                 }
+                
                 .padding(.leading, 20)
-                Spacer()
             }
             .padding(.top, 200)
         }
     .padding(25)
         .animation(.default)
+        .alert(isPresented: $showSocialAlert) {
+             Alert(title: Text(socialAlertTitle), message: Text(socialAlertMessage), dismissButton: .default(Text("Okay")))
+        }
     }
     
     enum MediaType {
@@ -134,15 +142,17 @@ struct QuoteCard: View {
                 ]
                 let pasteBoard = UIPasteboard.general
                 pasteBoard.setItems([pasteBoardItems], options: [.expirationDate: Date().addingTimeInterval(600)])
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                print("Cannot open the Instagram app. Instagram app not on user's device.")
+                self.setAlertContent(appName: "Instagram")
             }
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
             break
         case .Facebook:
             guard let url = URL(string: "facebook-stories://share") else {
                 print("Could not change facebook url string to url")
                 return
             }
-            
             if UIApplication.shared.canOpenURL(url) {
                 let items: [String: Any] = [
                     "com.facebook.sharedSticker.appID": "327002905407721",
@@ -155,8 +165,8 @@ struct QuoteCard: View {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
                 print("Could not open Facebook.")
+                self.setAlertContent(appName: "Facebook")
             }
-            
             break
 //        case .Twitter:
 //            AF.request("https://upload.twitter.com/1.1/media/upload.json", method: .post, parameters: ["media": CIImage(data: imageData) as Any], encoding: URLEncoding.queryString)
@@ -168,6 +178,12 @@ struct QuoteCard: View {
 //            }
 //            break
         }
+    }
+    
+    func setAlertContent(appName: String) {
+        self.socialAlertTitle = "\(appName) not found"
+        self.socialAlertMessage = "You must have \(appName) downloaded on your device to share to your story on \(appName)"
+        self.showSocialAlert = true
     }
     
     

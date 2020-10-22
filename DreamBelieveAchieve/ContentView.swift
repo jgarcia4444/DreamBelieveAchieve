@@ -28,27 +28,38 @@ struct ContentView: View {
                                 HStack {
                                     Text("D")
                                         .font(.title)
+                                    .fontWeight(.bold)
                                     Text("ream")
                                         .font(.body)
+                                    .fontWeight(.bold)
                                 }
+                                .foregroundColor(.pink)
                             }
                             .frame(width: 150)
                             .background(LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: .topLeading, endPoint: .bottomTrailing))
                             HStack {
                                 Text("B")
                                     .font(.title)
+                                .fontWeight(.bold)
                                 Text("elieve")
                                     .font(.body)
+                                .fontWeight(.bold)
                             }
+                                .foregroundColor(.red)
                             .frame(width: 175)
                             .background(LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .topLeading, endPoint: .bottomTrailing))
                             HStack {
                                 Text("A")
                                     .font(.title)
+                                .fontWeight(.bold)
                                 Text("chieve")
+                                    .fontWeight(.bold)
                                     .font(.body)
                                     .fixedSize(horizontal: true, vertical: false)
+                                
                             }
+                                
+                            .foregroundColor(.yellow)
                             .frame(width: 200)
                             .background(LinearGradient(gradient: Gradient(colors: [.red, .pink]), startPoint: .topLeading, endPoint: .bottomTrailing))
                         }
