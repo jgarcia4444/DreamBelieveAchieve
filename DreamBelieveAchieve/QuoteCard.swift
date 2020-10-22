@@ -71,6 +71,9 @@ struct QuoteCard: View {
                         .resizable()
                         .frame(width: 40, height: 40)
                         .padding(.leading, 20)
+                        .onTapGesture {
+                            self.shareToSocialMedia(medium: .Facebook)
+                    }
                     Image("instagram")
                         .resizable()
                         .frame(width: 40, height: 40)
@@ -114,7 +117,7 @@ struct QuoteCard: View {
         switch(medium) {
         case .Instagram:
             guard let url = URL(string: "instagram-stories://share") else {
-                print("Could not open instagram")
+                print("Could not change instagram url string to url")
                 return
             }
             
@@ -127,10 +130,28 @@ struct QuoteCard: View {
                 let pasteBoard = UIPasteboard.general
                 pasteBoard.setItems([pasteBoardItems], options: [.expirationDate: Date().addingTimeInterval(600)])
             }
-            
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
             break
         case .Facebook:
+            guard let url = URL(string: "facebook-stories://share") else {
+                print("Could not change facebook url string to url")
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(url) {
+                let items: [String: Any] = [
+                    "com.facebook.sharedSticker.appID": "327002905407721",
+                    "com.facebook.sharedSticker.backgroundTopColor": "#fecb2e",
+                    "com.facebook.sharedSticker.backgroundBottomColor": "#fc3158",
+                    "com.facebook.sharedSticker.stickerImage": imageData
+                ]
+                let pasteBoard = UIPasteboard.general
+                pasteBoard.setItems([items], options: [.expirationDate: Date().addingTimeInterval(600)])
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                print("Could not open Facebook.")
+            }
+            
             break
         case .Twitter:
             break
