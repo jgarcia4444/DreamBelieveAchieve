@@ -13,6 +13,7 @@
 		1F0655FC2536B80F00DE26E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0655FB2536B80F00DE26E0 /* Preview Assets.xcassets */; };
 		1F0655FF2536B80F00DE26E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F0655FD2536B80F00DE26E0 /* LaunchScreen.storyboard */; };
 		1F0656082536BD8600DE26E0 /* DreamBelieveAchieve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F0656062536BD8600DE26E0 /* DreamBelieveAchieve.xcdatamodeld */; };
+		1F5C53162540BA4100A06AD1 /* NotificationQuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C53152540BA4100A06AD1 /* NotificationQuoteView.swift */; };
 		1F5D3F4C2537C282001B4E19 /* QuoteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5D3F4B2537C282001B4E19 /* QuoteCard.swift */; };
 		1F9EE18F2537777C00F33C3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F9EE18E2537777C00F33C3F /* Assets.xcassets */; };
 		1F9EE1912537850200F33C3F /* NavigationTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EE1902537850200F33C3F /* NavigationTiles.swift */; };
@@ -32,6 +33,7 @@
 		1F0655FE2536B80F00DE26E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F0656002536B80F00DE26E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F0656072536BD8600DE26E0 /* DreamBelieveAchieve.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DreamBelieveAchieve.xcdatamodel; sourceTree = "<group>"; };
+		1F5C53152540BA4100A06AD1 /* NotificationQuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationQuoteView.swift; sourceTree = "<group>"; };
 		1F5D3F4B2537C282001B4E19 /* QuoteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCard.swift; sourceTree = "<group>"; };
 		1F9EE18E2537777C00F33C3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F9EE1902537850200F33C3F /* NavigationTiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTiles.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				1F0655F22536B80D00DE26E0 /* AppDelegate.swift */,
 				1F0655F42536B80D00DE26E0 /* SceneDelegate.swift */,
 				1F9EE1902537850200F33C3F /* NavigationTiles.swift */,
+				1F5C53152540BA4100A06AD1 /* NotificationQuoteView.swift */,
 				1F0655F62536B80D00DE26E0 /* ContentView.swift */,
 				1F9EE1942537864C00F33C3F /* DailyQuoteTimeView.swift */,
 				1F9EE1922537860000F33C3F /* RandomQuoteView.swift */,
@@ -244,6 +247,7 @@
 				1F5D3F4C2537C282001B4E19 /* QuoteCard.swift in Sources */,
 				1F9EE1992537869000F33C3F /* FavoriteQuotesView.swift in Sources */,
 				1F9EE1912537850200F33C3F /* NavigationTiles.swift in Sources */,
+				1F5C53162540BA4100A06AD1 /* NotificationQuoteView.swift in Sources */,
 				1F9EE1972537866900F33C3F /* SearchQuoteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

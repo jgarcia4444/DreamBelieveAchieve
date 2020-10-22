@@ -105,12 +105,6 @@ struct DailyQuoteTimeView: View {
                 UNUserNotificationCenter.current().add(notificationRequest, withCompletionHandler: nil)
             }
         }
-        
-        UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
-            notifications.forEach { (notification) in
-                print(notification)
-            }
-        }
     }
     
 }
