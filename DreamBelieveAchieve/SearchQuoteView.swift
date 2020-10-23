@@ -9,6 +9,14 @@
 import SwiftUI
 import CoreData
 
+// MARK TODO
+// MAKE KEYBOARD DISAPPEAR WHEN SOMEWHERE BESIDES WITHIN THE KEYBOARD IS TAPPED
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
 struct SearchQuoteView: View {
     @State private var searchTerm = ""
     @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)]) var quotes: FetchedResults<Quote>
@@ -46,6 +54,9 @@ struct SearchQuoteView: View {
                             }
                         }
                     }
+                }
+                .onTapGesture {
+                    UIApplication.shared.endEditing()
                 }
                 
             }

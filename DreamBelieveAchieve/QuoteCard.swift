@@ -99,7 +99,6 @@ struct QuoteCard: View {
                 
                 .padding(.leading, 20)
             }
-            .padding(.top, 200)
         }
     .padding(25)
         .animation(.default)
