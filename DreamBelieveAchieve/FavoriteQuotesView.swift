@@ -17,9 +17,6 @@ struct FavoriteQuotesView: View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
             VStack {
-                HStack {
-                    Text("Your list of favorted quotes")
-                }
                 ScrollView {
                     ForEach(self.favoritedQuotes, id: \.self.objectID) { quote in
                         VStack {
