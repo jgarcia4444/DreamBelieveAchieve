@@ -35,7 +35,7 @@ struct SearchQuoteView: View {
     }
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
+            LinearGradient(gradient: Gradient(colors: [.purple, .red, .pink, .orange, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
             VStack {
                 HStack {
                     TextField("Search quote text", text: $searchTerm)

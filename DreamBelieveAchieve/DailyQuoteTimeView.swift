@@ -16,7 +16,7 @@ struct DailyQuoteTimeView: View {
     @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)]) var quotes: FetchedResults<Quote>
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
+            LinearGradient(gradient: Gradient(colors: [.purple, .red, .pink, .orange, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
             VStack {
                 Text("Pick a time to be sent a quote")
                     .font(.title)
@@ -61,7 +61,13 @@ struct DailyQuoteTimeView: View {
                 }
                 
                 if let minute = dateComponents.minute {
-                    alert = Alert(title: Text("Time Set"),message:Text("You will recieve a quote notification at \(adjustedHour):\(minute) \(amPmString)"), dismissButton: .default(Text("Okay"), action: {
+                    var adjustedMinute = ""
+                    if minute < 10 {
+                        adjustedMinute = "0\(minute)"
+                    } else {
+                        adjustedMinute = "\(minute)"
+                    }
+                    alert = Alert(title: Text("Time Set"),message:Text("You will recieve a quote notification at \(adjustedHour):\(adjustedMinute) \(amPmString)"), dismissButton: .default(Text("Okay"), action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }))
                 }

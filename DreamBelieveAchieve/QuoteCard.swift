@@ -47,9 +47,13 @@ struct QuoteCard: View {
                 }
             }
             .padding(15)
-            .background(Color.red)
-            .cornerRadius(10)
-            .shadow(color: Color.black, radius: 4, x: 0, y: 0)
+            .background(LinearGradient(gradient: Gradient(colors: [.orange, .red, .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
+            .cornerRadius(20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.yellow, lineWidth: 4)
+            )
+            .shadow(radius: 20)
             HStack {
                 Button(action: {
                     self.favoriteQuote()

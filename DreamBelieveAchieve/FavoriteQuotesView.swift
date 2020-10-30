@@ -15,7 +15,7 @@ struct FavoriteQuotesView: View {
     @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)], predicate: NSPredicate(format: "isFavorited == true")) var favoritedQuotes: FetchedResults<Quote>
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
+            LinearGradient(gradient: Gradient(colors: [.purple, .red, .pink, .orange, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
             VStack {
                 ScrollView {
                     ForEach(self.favoritedQuotes, id: \.self.objectID) { quote in
