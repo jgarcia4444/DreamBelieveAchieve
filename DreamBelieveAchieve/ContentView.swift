@@ -27,41 +27,42 @@ struct ContentView: View {
                             HStack{
                                 HStack {
                                     Text("D")
-                                        .font(.title)
-                                    .fontWeight(.bold)
+                                        .font(.custom("SignPainter-HouseScript", size: 50))
                                     Text("ream")
-                                        .font(.body)
-                                    .fontWeight(.bold)
+                                        .font(.custom("SignPainter-HouseScript", size: 25))
                                 }
                                 .foregroundColor(.pink)
                             }
                             .frame(width: 150)
                             .background(LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .shadow(radius: 5)
                             HStack {
-                                Text("B")
-                                    .font(.title)
-                                .fontWeight(.bold)
-                                Text("elieve")
-                                    .font(.body)
-                                .fontWeight(.bold)
+                                HStack {
+                                    Text("B")
+                                        .font(.custom("SignPainter-HouseScript", size: 50))
+                                    Text("elieve")
+                                        .font(.custom("SignPainter-HouseScript", size: 25))
+                                }
+                                .foregroundColor(.white)
+                            
                             }
-                                .foregroundColor(.red)
                             .frame(width: 175)
                             .background(LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .shadow(radius: 10)
                             HStack {
-                                Text("A")
-                                    .font(.title)
-                                .fontWeight(.bold)
-                                Text("chieve")
-                                    .fontWeight(.bold)
-                                    .font(.body)
-                                    .fixedSize(horizontal: true, vertical: false)
-                                
+                                HStack {
+                                    Text("A")
+                                        .font(.custom("SignPainter-HouseScript", size: 50))
+                                    Text("chieve")
+                                        .font(.custom("SignPainter-HouseScript", size: 25))
+                                        .fixedSize(horizontal: true, vertical: false)
+                                }
                             }
                                 
                             .foregroundColor(.yellow)
                             .frame(width: 200)
                             .background(LinearGradient(gradient: Gradient(colors: [.red, .pink]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .shadow(radius: 15)
                         }
                     }
                     .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 2)

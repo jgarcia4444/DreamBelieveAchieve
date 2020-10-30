@@ -11,18 +11,25 @@ import SwiftUI
 struct DailyQuoteTimeView: View {
     @State private var selectedTime = Date()
     @State private var allowAlertShowing = false
+    @State private var timeSetAlert = false
+    @Environment(\.presentationMode) var presentationMode
     @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)]) var quotes: FetchedResults<Quote>
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
             VStack {
                 Text("Pick a time to be sent a quote")
+                    .font(.title)
                 HStack {
                     DatePicker(selection: $selectedTime, displayedComponents: .hourAndMinute) {
                         Text("Pick a time to be sent a quote")
                     }
                 .labelsHidden()
                 }
+                .padding()
+                .background(Color.yellow)
+                .cornerRadius(20)
+                .shadow(radius: 20)
                 HStack {
                     Button(action: {
                         self.setTimeForQuoteNotification()
@@ -33,13 +40,24 @@ struct DailyQuoteTimeView: View {
                         .clipShape(Capsule())
                         .shadow(color: .gray, radius: 5, x: 0, y: 0)
                     }
-                    
                 }
             }
             .foregroundColor(.white)
         }
         .alert(isPresented: $allowAlertShowing) {
             Alert(title: Text("Authorization Status"), message: Text("In order to allow notifications to be sent to your device from this app it needs to be allowed. Follow these instructions. Settings -> DreamBelieveAchieve -> Notifications -> Allow Notifications."), dismissButton: .default(Text("Okay")))
+        }
+        .alert(isPresented: $timeSetAlert) {
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: self.selectedTime)
+            var alert = Alert(title: Text("Time Set"))
+            if let hour = dateComponents.hour {
+                if let minute = dateComponents.minute {
+                    alert = Alert(title: Text("Time Set"),message:Text("You will recieve a quote notification at \(hour):\(minute)"), dismissButton: .default(Text("Okay"), action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }))
+                }
+            }
+            return alert
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -74,6 +92,7 @@ struct DailyQuoteTimeView: View {
     
     func scheduleNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         for i in 0..<25 {
             let content = UNMutableNotificationContent()
             let quote = randomQuote()
@@ -105,6 +124,7 @@ struct DailyQuoteTimeView: View {
                 UNUserNotificationCenter.current().add(notificationRequest, withCompletionHandler: nil)
             }
         }
+        self.timeSetAlert = true
     }
     
 }

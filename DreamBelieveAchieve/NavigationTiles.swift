@@ -18,15 +18,16 @@ struct NavigationTiles: View {
                     NavigationLink(destination: RandomQuoteView()) {
                         VStack {
                             Text("Random Quote")
+                                .font(.headline)
                             Image(systemName: "questionmark")
                         }
-                        
+                        .foregroundColor(.pink)
                     }
                 }
                 .frame(width: screenWidth / 2, height: screenHeight / 4)
                 .background(Color.yellow)
-                .foregroundColor(.pink)
-                .font(.headline)
+                .shadow(radius: 20)
+                
                 HStack {
                     NavigationLink(destination: DailyQuoteTimeView()) {
                         VStack {
@@ -40,6 +41,7 @@ struct NavigationTiles: View {
                 .background(Color.orange)
                 .foregroundColor(.red)
                 .font(.headline)
+                .shadow(radius: 20)
             }
             .frame(width: screenWidth, height: screenHeight / 4)
             HStack {
@@ -55,6 +57,7 @@ struct NavigationTiles: View {
                 .background(Color.red)
                 .foregroundColor(.orange)
                 .font(.headline)
+                .shadow(radius: 20)
                 HStack {
                     NavigationLink(destination: FavoriteQuotesView()) {
                         VStack {
@@ -68,6 +71,7 @@ struct NavigationTiles: View {
                 .background(Color.pink)
                 .foregroundColor(.yellow)
                 .font(.headline)
+                .shadow(radius: 20)
             }
             .frame(width: screenWidth, height: screenHeight / 4)
         }
