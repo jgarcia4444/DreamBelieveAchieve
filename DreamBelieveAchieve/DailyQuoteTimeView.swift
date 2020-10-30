@@ -51,8 +51,17 @@ struct DailyQuoteTimeView: View {
             let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: self.selectedTime)
             var alert = Alert(title: Text("Time Set"))
             if let hour = dateComponents.hour {
+                var adjustedHour: Int
+                var amPmString = "a.m"
+                if hour > 12 {
+                    adjustedHour = hour - 12
+                    amPmString = "p.m"
+                } else {
+                    adjustedHour = hour
+                }
+                
                 if let minute = dateComponents.minute {
-                    alert = Alert(title: Text("Time Set"),message:Text("You will recieve a quote notification at \(hour):\(minute)"), dismissButton: .default(Text("Okay"), action: {
+                    alert = Alert(title: Text("Time Set"),message:Text("You will recieve a quote notification at \(adjustedHour):\(minute) \(amPmString)"), dismissButton: .default(Text("Okay"), action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }))
                 }
