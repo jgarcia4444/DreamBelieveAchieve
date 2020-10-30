@@ -7,20 +7,35 @@
 //
 
 import UIKit
-//import SwiftUI
+import SwiftUI
+import CoreData
 //import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) {
-//        let notification = response.notification
-//        let body = notification.request.content.body
-//        let title = notification.request.content.title
-//        let notificationViewController = UIHostingController(rootView: NotificationQuoteView(title: title, text: body))
-//        UIApplication.shared.windows.first?.rootViewController?.present(notificationViewController, animated: false)
-//    }
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "DreamBelieveAchieve")
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        return container
+    }()
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let author = response.notification.request.content.title
+        let text = response.notification.request.content.body
+        let context = persistentContainer.viewContext
+        UIApplication.shared.windows.first?.rootViewController?.present(UIHostingController(rootView: NotificationQuoteView(title: author, text: text).environment(\.managedObjectContext, context)), animated: true, completion: nil)
+        
+        completionHandler()
+    }
 //
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("Hello There!!!")
         completionHandler([.alert])
     }
 
