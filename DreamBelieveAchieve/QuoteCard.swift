@@ -24,7 +24,7 @@ struct QuoteCard: View {
     @State private var showSocialAlert = false
     @State private var socialAlertTitle = ""
     @State private var socialAlertMessage = ""
-    var quote: Quote
+    @ObservedObject var quote: Quote
     var authorName: String {
         if quote.author == "" {
             return "Unknown"
@@ -74,6 +74,7 @@ struct QuoteCard: View {
                 .clipShape(Capsule())
                 .shadow(color: Color.black, radius: 4, x: 0, y: 0)
                 .foregroundColor(.white)
+                .animation(.default)
                 HStack {
                     Image("facebook")
                         .resizable()
@@ -193,6 +194,7 @@ struct QuoteCard: View {
     
     func favoriteQuote() {
         quote.isFavorited = !quote.isFavorited
+        
         do {
             try moc.save()
         } catch {

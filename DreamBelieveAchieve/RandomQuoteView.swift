@@ -9,19 +9,24 @@
 import SwiftUI
 
 struct RandomQuoteView: View {
+    @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)]) var quotes: FetchedResults<Quote>
+    
+    
     
     var randomQuote: Quote {
         let randomIndex = Int.random(in: 0..<quotes.count)
         return quotes[randomIndex]
     }
+ 
     
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.purple, .red, .pink, .orange, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
-            VStack {
-                QuoteCard(quote: randomQuote)
-            }
+
+                VStack {
+                    QuoteCard(quote: randomQuote)
+                }
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("Random Quote")

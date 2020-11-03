@@ -10,32 +10,49 @@ import SwiftUI
 import CoreData
 
 struct NotificationQuoteView: View {
-    let title: String
-    let text: String
+    var title: String = ""
+    var text: String = ""
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)]) var quotes: FetchedResults<Quote>
-    var quote: Quote {
-        var notificationQuote: Quote?
-        for item in quotes {
-            if item.text == text {
-                notificationQuote = item
-            }
-        }
-        return notificationQuote ?? quotes.first!
-    }
-    
+    @Environment(\.presentationMode) var presentationMode
+//    @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)], predicate: NSPredicate(format: "text CONTAINS %@", text)) var quotes: FetchedResults<Quote>
+    var quote: Quote?
+    @State private var quotes = [Quote]()
     var body: some View {
         
         ZStack {
         LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
             VStack {
-                QuoteCard(quote: quote)
+                HStack {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Home")
+                    }
+                }
+                if quotes.count > 0 {
+                    QuoteCard(quote: quotes[0])
+                } else {
+                    Text("Loading...")
+                }
             }
             .onAppear {
-                
+                self.findQuoteInDb()
+            }
+            
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+    func findQuoteInDb() {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
+        request.predicate = NSPredicate(format: "text like %@", text)
+        let results = try? moc.fetch(request)
+        if let resultQuotes = results as? [Quote] {
+            resultQuotes.forEach { quote in
+                self.quotes.append(quote)
             }
         }
     }
+    
 }
 
 //struct NotificationQuoteView_Previews: PreviewProvider {

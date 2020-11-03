@@ -10,12 +10,11 @@ import UIKit
 import SwiftUI
 import CoreData
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
-
-
-    lazy var persistentContainer: NSPersistentContainer = {
+    
+    private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DreamBelieveAchieve")
         container.loadPersistentStores { description, error in
             if let error = error {
@@ -37,6 +36,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
     }
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let author = response.notification.request.content.title
+        let text = response.notification.request.content.body
+        
+        let notificationVC = UIHostingController(rootView: NotificationQuoteView(title: author, text: text).environment(\.managedObjectContext, persistentContainer.viewContext))
+        
+        UIApplication.shared.windows.first?.rootViewController?.present(notificationVC, animated: true)
+
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("Hello There!!!")
+        completionHandler([.alert])
+    }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -54,6 +70,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+        UNUserNotificationCenter.current().delegate = self
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
