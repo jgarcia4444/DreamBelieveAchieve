@@ -22,13 +22,6 @@ struct NotificationQuoteView: View {
         ZStack {
         LinearGradient(gradient: Gradient(colors: [.red, .pink, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
             VStack {
-                HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Text("Home")
-                    }
-                }
                 if quotes.count > 0 {
                     QuoteCard(quote: quotes[0])
                 } else {

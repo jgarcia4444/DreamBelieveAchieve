@@ -73,7 +73,6 @@ struct ContentView: View {
                 }
             }
             .edgesIgnoringSafeArea(.all)
-            .navigationBarTitle("Home")
         }
         .onAppear {
             self.loadQuotes()

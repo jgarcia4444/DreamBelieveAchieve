@@ -12,17 +12,51 @@ struct DailyQuoteTimeView: View {
     @State private var selectedTime = Date()
     @State private var allowAlertShowing = false
     @State private var timeSetAlert = false
+    @State private var notificationTime = ""
+    @State private var showRemovalAction = false
     @Environment(\.presentationMode) var presentationMode
     @FetchRequest(entity: Quote.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Quote.text, ascending: false)]) var quotes: FetchedResults<Quote>
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.purple, .red, .pink, .orange, .yellow]), startPoint: .bottomTrailing, endPoint: .topLeading)
             VStack {
-                Text("Pick a time to be sent a quote")
-                    .font(.title)
+                if notificationTime != "" {
+                    VStack {
+                        HStack {
+                            Button(action: {
+                                self.showRemovalAction = true
+                            }) {
+                                Image(systemName: "trash.fill")
+                                    .foregroundColor(.red)
+                            }
+                            .padding()
+                            .background(Color.white)
+                            .clipShape(Circle())
+                            .shadow(radius: 5)
+                            
+                        }
+                        Text("Notification Time")
+                            .font(.title)
+                        Text(notificationTime)
+                            .fontWeight(.bold)
+                        Text("To update the time pick another time on the picker.")
+                            .font(.caption)
+                    }
+                    .padding()
+                    .background(Color.yellow)
+                    .cornerRadius(20)
+                    .padding(.bottom, 100)
+                    .foregroundColor(.black)
+                .shadow(radius: 10)
+                }
+                
+                HStack {
+                    Text("Pick a time to be sent a quote")
+                        .font(.title)
+                }
                 HStack {
                     DatePicker(selection: $selectedTime, displayedComponents: .hourAndMinute) {
-                        Text("Pick a time to be sent a quote")
+                        Text("")
                     }
                 .labelsHidden()
                 }
@@ -39,10 +73,16 @@ struct DailyQuoteTimeView: View {
                         .background(Color.yellow)
                         .clipShape(Capsule())
                         .shadow(color: .gray, radius: 5, x: 0, y: 0)
+                            .foregroundColor(.black)
                     }
                 }
             }
             .foregroundColor(.white)
+        }
+        .actionSheet(isPresented: $showRemovalAction) {
+            ActionSheet(title: Text("Remove Set Time"), message: Text("Tapping remove will unschedule daily notifications"), buttons: [.default(Text("Cancel")), .destructive(Text("Remove").foregroundColor(.red), action: {
+                self.removeNotifications()
+            })])
         }
         .alert(isPresented: $allowAlertShowing) {
             Alert(title: Text("Authorization Status"), message: Text("In order to allow notifications to be sent to your device from this app it needs to be allowed. Follow these instructions. Settings -> DreamBelieveAchieve -> Notifications -> Allow Notifications."), dismissButton: .default(Text("Okay")))
@@ -75,6 +115,52 @@ struct DailyQuoteTimeView: View {
             return alert
         }
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            self.loadNotificationTime()
+        }
+    }
+    
+    func removeNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        self.notificationTime = ""
+    }
+    
+    func loadNotificationTime() {
+        let center = UNUserNotificationCenter.current()
+        center.getPendingNotificationRequests { (notifications) in
+            guard let notification = notifications.first else {
+                print("No notifications set")
+                return
+            }
+            let notificationTrigger = notification.trigger as? UNCalendarNotificationTrigger
+            guard let hour = notificationTrigger?.dateComponents.hour else {
+                print("No hour for calendar trigger.")
+                return
+            }
+            guard let minute = notificationTrigger?.dateComponents.minute else {
+                print("No minute for calendar trigger.")
+                return
+            }
+            var amPm = ""
+            var adjustedHour = ""
+            if hour > 12 {
+                adjustedHour = String(hour - 12)
+                amPm = "p.m."
+            } else {
+                amPm = "a.m."
+                adjustedHour = String(hour)
+            }
+            var adjustedMinute = ""
+            if minute < 10 {
+                adjustedMinute += "0\(minute)"
+            } else {
+                adjustedMinute = String(minute)
+            }
+            
+            self.notificationTime = "\(adjustedHour):\(adjustedMinute) \(amPm)"
+            
+        }
     }
     
     func randomQuote() -> Quote {

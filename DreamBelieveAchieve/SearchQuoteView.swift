@@ -54,11 +54,14 @@ struct SearchQuoteView: View {
                             }
                         }
                     }
+                    
                 }
                 .onTapGesture {
                     UIApplication.shared.endEditing()
                 }
-                
+            }
+            .onTapGesture {
+                UIApplication.shared.endEditing()
             }
         }
         .edgesIgnoringSafeArea(.all)
